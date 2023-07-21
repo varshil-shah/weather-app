@@ -25,46 +25,54 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Obx(
-          () => globalController.checkLoading().isTrue
-              ? Center(
-                  child: Image.asset(
-                    'assets/icons/clouds.png',
-                    height: 300,
-                    width: 300,
-                  ),
-                )
-              : ListView(
-                  scrollDirection: Axis.vertical,
-                  children: [
-                    const SizedBox(height: 20),
-                    const HeaderWidget(),
-                    CurrentWeather(
-                      weatherCurrent:
-                          globalController.getWeatherData().getCurrentWeather(),
+        child: RefreshIndicator(
+          onRefresh: () async {
+            globalController.getLocation();
+          },
+          child: Obx(
+            () => globalController.checkLoading().isTrue
+                ? Center(
+                    child: Image.asset(
+                      'assets/icons/clouds.png',
+                      height: 300,
+                      width: 300,
                     ),
-                    const SizedBox(height: 20),
-                    HourlyWeatherWidget(
-                      weatherHourly:
-                          globalController.getWeatherData().getHourlyWeather(),
-                    ),
-                    DailyWeatherWidget(
-                      weatherDaily:
-                          globalController.getWeatherData().getDailyWeather(),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      child: const Divider(
-                        color: CustomColor.dividerLine,
+                  )
+                : ListView(
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      const SizedBox(height: 20),
+                      const HeaderWidget(),
+                      CurrentWeather(
+                        weatherCurrent: globalController
+                            .getWeatherData()
+                            .getCurrentWeather(),
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    ComfortLevelWidget(
-                      weatherCurrent:
-                          globalController.getWeatherData().getCurrentWeather(),
-                    ),
-                  ],
-                ),
+                      const SizedBox(height: 20),
+                      HourlyWeatherWidget(
+                        weatherHourly: globalController
+                            .getWeatherData()
+                            .getHourlyWeather(),
+                      ),
+                      DailyWeatherWidget(
+                        weatherDaily:
+                            globalController.getWeatherData().getDailyWeather(),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        child: const Divider(
+                          color: CustomColor.dividerLine,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      ComfortLevelWidget(
+                        weatherCurrent: globalController
+                            .getWeatherData()
+                            .getCurrentWeather(),
+                      ),
+                    ],
+                  ),
+          ),
         ),
       ),
     );

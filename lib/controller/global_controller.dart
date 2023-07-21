@@ -31,6 +31,7 @@ class GlobalController extends GetxController {
   getLocation() async {
     LocationPermission locationPermission;
     bool isServiceEnable;
+    _isLoading.value = true;
 
     isServiceEnable = await Geolocator.isLocationServiceEnabled();
 
