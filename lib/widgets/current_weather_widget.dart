@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app/model/weather_current.dart';
 import 'package:weather_app/utils/custom_colors.dart';
 
@@ -46,7 +47,7 @@ class CurrentWeather extends StatelessWidget {
               width: 60,
               child: Text(
                 "${weatherCurrent.current.windSpeed}km/h",
-                style: const TextStyle(fontSize: 15),
+                style: GoogleFonts.poppins(fontSize: 15),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -55,7 +56,7 @@ class CurrentWeather extends StatelessWidget {
               width: 60,
               child: Text(
                 "${weatherCurrent.current.clouds}%",
-                style: const TextStyle(fontSize: 15),
+                style: GoogleFonts.poppins(fontSize: 15),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -64,7 +65,7 @@ class CurrentWeather extends StatelessWidget {
               width: 60,
               child: Text(
                 "${weatherCurrent.current.humidity}%",
-                style: const TextStyle(fontSize: 15),
+                style: GoogleFonts.poppins(fontSize: 15),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -93,7 +94,7 @@ class CurrentWeather extends StatelessWidget {
             children: [
               TextSpan(
                 text: "${weatherCurrent.current.temp!.toInt()}°",
-                style: const TextStyle(
+                style: GoogleFonts.poppins(
                   fontSize: 60,
                   fontWeight: FontWeight.w600,
                   color: CustomColor.textColorBlack,
@@ -101,7 +102,7 @@ class CurrentWeather extends StatelessWidget {
               ),
               TextSpan(
                 text: "${weatherCurrent.current.weather![0].main}",
-                style: const TextStyle(
+                style: GoogleFonts.poppins(
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                   color: Colors.grey,
