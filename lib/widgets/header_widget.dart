@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-import '../controller/global_controller.dart';
+import 'package:weather_app/utils/custom_colors.dart';
+import 'package:weather_app/controller/global_controller.dart';
 
 class HeaderWidget extends StatefulWidget {
   const HeaderWidget({super.key});
@@ -51,7 +52,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
               height: 2,
               fontSize: 35,
               fontWeight: FontWeight.w500,
-              color: const Color.fromARGB(255, 33, 37, 71),
+              color: CustomColor.textColorBlack,
             ),
           ),
         ),
@@ -64,7 +65,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
               height: 1.5,
               fontSize: 14,
               fontWeight: FontWeight.w500,
-              color: const Color.fromARGB(150, 33, 37, 71),
+              color: CustomColor.textColorBlackOpacity,
             ),
           ),
         ),
