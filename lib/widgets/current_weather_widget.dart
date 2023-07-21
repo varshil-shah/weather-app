@@ -44,7 +44,6 @@ class CurrentWeather extends StatelessWidget {
           children: [
             SizedBox(
               height: 20,
-              width: 60,
               child: Text(
                 "${weatherCurrent.current.windSpeed}km/h",
                 style: GoogleFonts.poppins(fontSize: 15),
