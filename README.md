@@ -1,16 +1,18 @@
-# weather_app
+# Weather app
 
-A new Flutter project.
+A simple weather app which displays weather in your area based on the geolocation.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Click on the release section and download the apk.
+2. Execute the apk file and turn the geolocation.
 
-A few resources to get you started if this is your first Flutter project:
+## Weather API -
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Currently, in my project I'm using [Open weather map](https://openweathermap.org/) this API.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Want to fork?
+
+Feel free to folk the my project.
+
+`Add api_key.dart file under /lib/api/ and given variable same name as api_key.example.dart file`
