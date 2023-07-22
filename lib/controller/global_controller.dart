@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+
 import 'package:weather_app/api/fetch_weather.dart';
 import 'package:weather_app/model/weather_data.dart';
 
-class GlobalController extends GetxController {
+class GlobalController extends GetxController with WidgetsBindingObserver {
   // Create various variables
   final RxBool _isLoading = true.obs;
   final RxDouble _lattitude = 0.0.obs;
@@ -25,24 +27,20 @@ class GlobalController extends GetxController {
     super.onInit();
     if (_isLoading.isTrue) {
       getLocation();
-
-      // Timer to rerun app if location is turn on in between
-      bool isServiceEnabled = await Geolocator.isLocationServiceEnabled();
-      if (!isServiceEnabled) {
-        Timer.periodic(
-          const Duration(seconds: 10),
-          (timer) async {
-            isServiceEnabled = await Geolocator.isLocationServiceEnabled();
-            if (isServiceEnabled) {
-              getLocation();
-              timer.cancel();
-              print("Timer destroyed");
-            }
-          },
-        );
-      }
     } else {
       getIndex();
+    }
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (Navigator.of(Get.overlayContext!).canPop()) {
+      Navigator.of(Get.overlayContext!).pop();
+    }
+    if (state == AppLifecycleState.resumed) {
+      getLocation();
     }
   }
 
@@ -63,12 +61,27 @@ class GlobalController extends GetxController {
       }
     }
 
-    final isServiceEnabled = await Geolocator.isLocationServiceEnabled();
+    final bool isServiceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!isServiceEnabled) {
-      return Get.snackbar(
-        'Location service',
-        'Location is denied or not turned on',
-        duration: const Duration(seconds: 5),
+      await Get.dialog(
+        AlertDialog(
+          title: const Text("Location"),
+          content: const Text("This app require your location to proceed!"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(Get.overlayContext!).pop();
+              },
+              child: const Text("Close"),
+            ),
+            TextButton(
+              onPressed: () async {
+                await Geolocator.openLocationSettings();
+              },
+              child: const Text("Settings"),
+            ),
+          ],
+        ),
       );
     }
 
